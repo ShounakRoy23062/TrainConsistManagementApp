@@ -1,30 +1,24 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrainApp {
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
 
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-        String searchKey = "BG309";
+        List<String> bogieIds = new ArrayList<>();
 
-        Arrays.sort(bogieIds);
+        String searchKey = "BG101";
 
-        int low = 0;
-        int high = bogieIds.length - 1;
+        if (bogieIds.isEmpty()) {
+            throw new IllegalStateException("Cannot perform search: Train has no bogies");
+        }
+
         boolean found = false;
 
-        while (low <= high) {
-            int mid = (low + high) / 2;
-
-            int cmp = bogieIds[mid].compareTo(searchKey);
-
-            if (cmp == 0) {
+        for (String id : bogieIds) {
+            if (id.equals(searchKey)) {
                 found = true;
                 break;
-            } else if (cmp < 0) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
             }
         }
 
